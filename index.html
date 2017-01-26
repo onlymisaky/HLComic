@@ -5,15 +5,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>红旅动漫</title>
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/fonts.css">
 </head>
 
 <body>
-    <!-- 状态栏 -->
-    <header>
-        <div class="left"></div>
-        <div class="right"></div>
-        <div class="center">红旅动漫</div>
-    </header>
+    <!--先把主体内容写好，然后再写一个大盒子viewport，在里面写一个侧边栏slider，再把主体内容复制过来-->
+    <section class="viewport">
+        <!-- 侧边栏 -->
+        <section class="slider">
+            <div class="logo">
+                <img src="http://www.hltm.tv/statics/tp/images/logo.png">
+            </div>
+            <div class="list">连载动漫</div>
+            <div class="list">专题列表</div>
+            <div class="list">关于</div>
+            <div class="list"></div>
+        </section>
+        <!-- 主体内容 -->
+        <!-- 状态栏 -->
+        <header>
+            <div id="category" class="left iconfont icon-category"></div>
+            <div class="right iconfont icon-search"></div>
+            <h2 class="center">红旅动漫</h2>
+        </header>
+        <section class="body">
+            <!-- 焦点图 -->
+            <section class="course">
+                <img src="http://pic.eduvip.cn/yuansiltu/uploads/editor/2015/08/20150801115445357.jpg">
+            </section>
+            <!-- tab栏 -->
+            <section class="tab">
+                <span class="left w25 current">新增连载</span>
+                <span class="left w25">新增完结</span>
+                <span class="left w25">推荐连载</span>
+                <span class="left w25">推荐完结</span>
+            </section>
+            <section class="comiclist clearfix">
+                <div class="left w50">
+                    <div class="comicimg">
+                        <img src="http://pic.eduvip.cn/yuansiltu/uploads/editor/2016/06/20160625115909923.jpg">
+                        <div class="comicindex">连载至第10集</div>
+                    </div>
+                    <div class="comictitle">灵能百分百</div>
+                </div>
+                <div class="left w50">
+                    <div class="comicimg">
+                        <img src="http://pic.eduvip.cn/yuansiltu/uploads/editor/2016/06/20160625115909923.jpg">
+                        <div class="comicindex">连载至第10集</div>
+                    </div>
+                    <div class="comictitle">灵能百分百</div>
+                </div>
+                <div class="left w50">
+                    <div class="comicimg">
+                        <img src="http://pic.eduvip.cn/yuansiltu/uploads/editor/2016/06/20160625115909923.jpg">
+                        <div class="comicindex">连载至第10集</div>
+                    </div>
+                    <div class="comictitle">灵能百分百</div>
+                </div>
+                <div class="left w50">
+                    <div class="comicimg">
+                        <img src="http://pic.eduvip.cn/yuansiltu/uploads/editor/2016/06/20160625115909923.jpg">
+                        <div class="comicindex">连载至第10集</div>
+                    </div>
+                    <div class="comictitle">灵能百分百</div>
+                </div>
+                <div class="left w50">
+                    <div class="comicimg">
+                        <img src="http://pic.eduvip.cn/yuansiltu/uploads/editor/2016/06/20160625115909923.jpg">
+                        <div class="comicindex">连载至第10集</div>
+                    </div>
+                    <div class="comictitle">灵能百分百</div>
+                </div>
+            </section>
+        </section>
+    </section>
 </body>
 
 </html>
+<script>
+    var slider = document.querySelector(".slider");
+    var body = document.querySelector(".body");
+    var header = document.querySelector("header");
+    var category = document.getElementById("category");
+    category.addEventListener("click", function () {
+        header.classList.toggle("show");
+        slider.classList.toggle("show");
+        body.classList.toggle("show");
+    });
+</script>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>侧边栏测试</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        
+        div {
+            height: 500px;
+        }
+        
+        .viewport {
+            overflow: hidden;
+        }
+        
+        .slider {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: -100px;
+            width: 100px;
+            background-color: hotpink;
+            transition: all .5s;
+        }
+        
+        .show {
+            transform: translateX(100px);
+        }
+        
+        .body {
+            background-color: skyblue;
+            transition: all .5s;
+        }
+    </style>
+</head>
+
+<body>
+    <!--一个大盒子，里面放侧边栏和主体内容-->
+    <div class="viewport">
+        <!--侧边栏-->
+        <div class="slider">1234567890</div>
+        <!--主题内容-->
+        <div class="body">1234567890</div>
+    </div>
+</body>
+
+</html>
+<script>
+    var body = document.querySelector(".body");
+    var slider = document.querySelector(".slider");
+    body.addEventListener("click", function () {
+        slider.classList.toggle("show");
+        this.classList.toggle("show");
+    });
+</script>

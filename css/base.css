@@ -1,14 +1,72 @@
+/*样式初始化，用到一个写一个*/
+
 html,
 body,
-header {
+div,
+header,
+h2 {
     padding: 0;
     margin: 0;
 }
 
+
+/*设定宽度范围*/
+
+html,
+body {
+    min-width: 320px;
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+
+/*设置页面字体，颜色*/
+
+body {
+    font: 16px/1.5 "Microsoft YaHei", "宋体";
+    color: #131313;
+    background-color: #fff;
+}
+
+img {
+    display: block;
+    width: 100%;
+}
+
+
+/*清除浮动*/
+
+.clearfix::after {
+    content: "";
+    display: block;
+    visibility: hidden;
+    height: 0;
+    clear: both;
+}
+
+.clearfix {
+    zoom: 1;
+}
+
+
+/*公共类样式*/
+
 .left {
-    float: left
+    float: left;
 }
 
 .right {
     float: right;
+}
+
+.w20 {
+    width: 20%;
+}
+
+.w25 {
+    width: 25%;
+}
+
+.w50 {
+    width: 50%;
 }
