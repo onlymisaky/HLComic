@@ -65,39 +65,3 @@ header>h2 {
     height: 30px;
     line-height: 30px;
 }
-
-
-/*实现侧边栏*/
-
-.viewport {
-    overflow: hidden;
-}
-
-.slider {
-    position: fixed;
-    top: 0px;
-    bottom: 0px;
-    left: -200px;
-    width: 200px;
-}
-
-.slider>.logo {
-    margin: 10px 20px;
-}
-
-.slider>.list {
-    height: 40px;
-    line-height: 40px;
-    padding: 0px 20px;
-    border-top: 1px solid #ccc;
-}
-
-.slider,
-.body,
-header {
-    transition: all .8s;
-}
-
-.show {
-    transform: translateX(200px);
-}

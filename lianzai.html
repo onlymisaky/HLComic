@@ -11,83 +11,48 @@
 </head>
 
 <body>
-    <section class="viewport">
-        <section class="slider">
-            <div class="logo">
-                <img src="http://www.hltm.tv/statics/tp/images/logo.png">
-            </div>
-            <div class="list">连载动漫</div>
-            <div class="list">专题列表</div>
-            <div class="list">关于</div>
-            <div class="list"></div>
-        </section>
-        <!-- 主体内容 -->
-        <!-- 状态栏 -->
-        <header>
-            <div id="back" class="left iconfont icon-back"></div>
-            <div class="right"></div>
-            <h2 class="center">连载动漫</h2>
-        </header>
-        <section class="body">
-            <div class="list clearfix">
-                <div class="left comicimg">
-                    <img src="http://pic.hltm.tv/uploads/editor/2016/02/20160207063238353.jpg">
-                </div>
-                <div class="info">
-                    <div class="name">Maho Girls 光之美少女！/魔法师光之美少女</div>
-                    <div class="episode">连载至36集</div>
-                    <div class="updateTime">10-11 更新</div>
-                    <div class="downloadCount">7450</div>
-                </div>
-            </div>
-            <div class="list clearfix">
-                <div class="left comicimg">
-                    <img src="http://pic.hltm.tv/uploads/editor/2016/02/20160207063238353.jpg">
-                </div>
-                <div class="info">
-                    <div class="name">Maho Girls 光之美少女！/魔法师光之美少女</div>
-                    <div class="episode">连载至36集</div>
-                    <div class="updateTime">10-11 更新</div>
-                    <div class="downloadCount">7450</div>
-                </div>
-            </div>
-            <div class="list clearfix">
-                <div class="left comicimg">
-                    <img src="http://pic.hltm.tv/uploads/editor/2016/02/20160207063238353.jpg">
-                </div>
-                <div class="info">
-                    <div class="name">Maho Girls 光之美少女！/魔法师光之美少女</div>
-                    <div class="episode">连载至36集</div>
-                    <div class="updateTime">10-11 更新</div>
-                    <div class="downloadCount">7450</div>
-                </div>
-            </div>
-            <div class="list clearfix">
-                <div class="left comicimg">
-                    <img src="http://pic.hltm.tv/uploads/editor/2016/02/20160207063238353.jpg">
-                </div>
-                <div class="info">
-                    <div class="name">Maho Girls 光之美少女！/魔法师光之美少女</div>
-                    <div class="episode">连载至36集</div>
-                    <div class="updateTime">10-11 更新</div>
-                    <div class="downloadCount">7450</div>
-                </div>
-            </div>
-            <div class="list clearfix">
-                <div class="left comicimg">
-                    <img src="http://pic.hltm.tv/uploads/editor/2016/02/20160207063238353.jpg">
-                </div>
-                <div class="info">
-                    <div class="name">Maho Girls 光之美少女！/魔法师光之美少女</div>
-                    <div class="episode">连载至36集</div>
-                    <div class="updateTime">10-11 更新</div>
-                    <div class="downloadCount">7450</div>
-                </div>
-            </div>
-        </section>
+    <!-- 主体内容 -->
+    <!-- 状态栏 -->
+    <header>
+        <div id="back" class="left iconfont icon-back"></div>
+        <div class="right"></div>
+        <h2 class="center">连载动漫</h2>
+    </header>
+    <section class="body">
     </section>
 </body>
 
 </html>
+<!-- 专题列表模板 -->
+<script type="text/template" id="tpl">
+    {{ each list as v k }}
+    <div class="list clearfix">
+        <div class="left comicimg">
+            <img src="{{ v.img }}">
+        </div>
+        <div class="info">
+            <div class="name">{{ v.name }}</div>
+            <div class="episode">{{ v.episode }}</div>
+            <div class="updateTime">{{ v.updateTime }}</div>
+            <div class="downloadCount">下载次数：{{ v.downloadCount }}</div>
+        </div>
+    </div>
+    {{ /each }}
+</script>
+<script src="./js/template.js"></script>
+<script src="./js/jquery.min.js"></script>
 <script>
+    $(function () {
+        $.ajax({
+            url: "http://182.254.146.100:9090/api/getlianzai",
+            type: "get",
+            data: null,
+            success: function (respnse) {
+                var html = template("tpl", {
+                    list: respnse
+                });
+                $(".body").html(html);
+            }
+        });
+    });
 </script>

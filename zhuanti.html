@@ -4,59 +4,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>红旅动漫 -- 连载动漫</title>
+    <title>红旅动漫 -- 专题列表</title>
     <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="./css/zhuanti.css">
     <link rel="stylesheet" href="./css/fonts.css">
 </head>
 
 <body>
-    <section class="viewport">
-        <section class="slider">
-            <div class="logo">
-                <img src="http://www.hltm.tv/statics/tp/images/logo.png">
-            </div>
-            <div class="list">连载动漫</div>
-            <div class="list">专题列表</div>
-            <div class="list">关于</div>
-            <div class="list"></div>
-        </section>
-        <!-- 主体内容 -->
-        <!-- 状态栏 -->
-        <header>
-            <div id="back" class="left iconfont icon-back"></div>
-            <div class="right"></div>
-            <h2 class="center">专题列表</h2>
-        </header>
-        <section class="body">
-            <div class="list clearfix">
-                <img src="http://pic.hltm.tv/uploads/editor/2016/03/20160328102551507.jpg">
-                <div class="title">2016年四月新番</div>
-            </div>
-            <div class="list clearfix">
-                <img src="http://pic.hltm.tv/uploads/editor/2016/03/20160328102551507.jpg">
-                <div class="title">2016年四月新番</div>
-            </div>
-            <div class="list clearfix">
-                <img src="http://pic.hltm.tv/uploads/editor/2016/03/20160328102551507.jpg">
-                <div class="title">2016年四月新番</div>
-            </div>
-            <div class="list clearfix">
-                <img src="http://pic.hltm.tv/uploads/editor/2016/03/20160328102551507.jpg">
-                <div class="title">2016年四月新番</div>
-            </div>
-            <div class="list clearfix">
-                <img src="http://pic.hltm.tv/uploads/editor/2016/03/20160328102551507.jpg">
-                <div class="title">2016年四月新番</div>
-            </div>
-            <div class="list clearfix">
-                <img src="http://pic.hltm.tv/uploads/editor/2016/03/20160328102551507.jpg">
-                <div class="title">2016年四月新番</div>
-            </div>
-        </section>
+    <!-- 主体内容 -->
+    <!-- 状态栏 -->
+    <header>
+        <div id="back" class="left iconfont icon-back"></div>
+        <div class="right"></div>
+        <h2 class="center">专题列表</h2>
+    </header>
+    <section class="body">
     </section>
 </body>
 
 </html>
+<!-- 专题列表模板 -->
+<script type="text/template" id="tpl">
+    {{ each list }}
+    <div class="list clearfix">
+        <img src="{{ $value.img }}">
+        <div class="title">{{ $value.title }}</div>
+    </div>
+    {{ /each }}
+</script>
+<script src="./js/template.js"></script>
+<script src="./js/jquery.min.js"></script>
 <script>
+    $(function () {
+        $.ajax({
+            url: "http://182.254.146.100:9090/api/gettopics",
+            type: "get",
+            data: null,
+            success: function (respnse) {
+                var html = template("tpl", {
+                    list: respnse
+                });
+
+                $(".body").html(html);
+            }
+        });
+    });
 </script>
