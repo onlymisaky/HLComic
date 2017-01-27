@@ -4,7 +4,11 @@ html,
 body,
 div,
 header,
-h2 {
+h2,
+a,
+ul,
+ol,
+li {
     padding: 0;
     margin: 0;
 }
@@ -31,6 +35,22 @@ body {
 img {
     display: block;
     width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: #969696;
+    font-family: 'Microsoft YaHei', Tahoma, Arial, sans-serif;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+ol,
+ul,
+li {
+    list-style: none;
 }
 
 

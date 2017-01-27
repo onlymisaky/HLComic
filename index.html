@@ -18,10 +18,10 @@
             <div class="logo">
                 <img src="http://www.hltm.tv/statics/tp/images/logo.png">
             </div>
-            <div class="list">连载动漫</div>
-            <div class="list">专题列表</div>
-            <div class="list">关于</div>
-            <div class="list"></div>
+            <a href="./lianzai.html" class="list">连载动漫</a>
+            <a href="./zhuanti.html" class="list">专题列表</a>
+            <a class="list">关于</a>
+            <a class="list"></a>
         </section>
         <!-- 主体内容 -->
         <!-- 状态栏 -->
@@ -32,66 +32,98 @@
         </header>
         <section class="body">
             <!-- 焦点图 -->
-            <section class="course">
-                <img src="http://pic.eduvip.cn/yuansiltu/uploads/editor/2015/08/20150801115445357.jpg">
+            <section id="course">
+                <ul id="warp">
+                </ul>
+                <ol id="point">
+                </ol>
             </section>
             <!-- tab栏 -->
             <section class="tab">
-                <span class="left w25 current">新增连载</span>
-                <span class="left w25">新增完结</span>
-                <span class="left w25">推荐连载</span>
-                <span class="left w25">推荐完结</span>
+                <span class="left w25 current" data-id="1">新增连载</span>
+                <span class="left w25" data-id="2">新增完结</span>
+                <span class="left w25" data-id="3">推荐连载</span>
+                <span class="left w25" data-id="4">推荐完结</span>
             </section>
             <section class="comiclist clearfix">
-                <div class="left w50">
-                    <div class="comicimg">
-                        <img src="http://pic.eduvip.cn/yuansiltu/uploads/editor/2016/06/20160625115909923.jpg">
-                        <div class="comicindex">连载至第10集</div>
-                    </div>
-                    <div class="comictitle">灵能百分百</div>
-                </div>
-                <div class="left w50">
-                    <div class="comicimg">
-                        <img src="http://pic.eduvip.cn/yuansiltu/uploads/editor/2016/06/20160625115909923.jpg">
-                        <div class="comicindex">连载至第10集</div>
-                    </div>
-                    <div class="comictitle">灵能百分百</div>
-                </div>
-                <div class="left w50">
-                    <div class="comicimg">
-                        <img src="http://pic.eduvip.cn/yuansiltu/uploads/editor/2016/06/20160625115909923.jpg">
-                        <div class="comicindex">连载至第10集</div>
-                    </div>
-                    <div class="comictitle">灵能百分百</div>
-                </div>
-                <div class="left w50">
-                    <div class="comicimg">
-                        <img src="http://pic.eduvip.cn/yuansiltu/uploads/editor/2016/06/20160625115909923.jpg">
-                        <div class="comicindex">连载至第10集</div>
-                    </div>
-                    <div class="comictitle">灵能百分百</div>
-                </div>
-                <div class="left w50">
-                    <div class="comicimg">
-                        <img src="http://pic.eduvip.cn/yuansiltu/uploads/editor/2016/06/20160625115909923.jpg">
-                        <div class="comicindex">连载至第10集</div>
-                    </div>
-                    <div class="comictitle">灵能百分百</div>
-                </div>
             </section>
         </section>
     </section>
 </body>
 
 </html>
+<script type="text/template" id="c">
+    {{ each list as v k }}
+    <li>
+        <img src="{{ v.img }}">
+        <span>{{ v.title }}</span>
+    </li>
+    {{ /each }}
+</script>
+<script type="text/template" id="tpl">
+    {{ each list as v k }}
+    <div class="left w50">
+        <div class="comicimg">
+            <img src="{{ v.img }}">
+            <div class="comicindex">{{ v.update }}</div>
+        </div>
+        <div class="comictitle">{{ v.name }}</div>
+    </div>
+    {{ /each }}
+</script>
+<script src="./js/template.js"></script>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/course.js"></script>
 <script>
-    var slider = document.querySelector(".slider");
-    var body = document.querySelector(".body");
-    var header = document.querySelector("header");
-    var category = document.getElementById("category");
-    category.addEventListener("click", function () {
-        header.classList.toggle("show");
-        slider.classList.toggle("show");
-        body.classList.toggle("show");
+    $(function () {
+
+        $.ajax({
+            url: "http://182.254.146.100:9090/api/getlunbo",
+            type: "get",
+            data: null,
+            success: function (response) {
+                var html = template("c", {
+                    list: response
+                });
+                $("#warp").html(html);
+                var c = new Course({
+                    course: document.getElementById('course'),
+                    warp: document.getElementById('warp'),
+                    list: warp.getElementsByTagName("li"),
+                    point: document.getElementById('point')
+                });
+            }
+        });
+
+        getList("1");
+
+        var slider = document.querySelector(".slider");
+        var body = document.querySelector(".body");
+        var header = document.querySelector("header");
+        var category = document.getElementById("category");
+        category.addEventListener("click", function () {
+            header.classList.toggle("show");
+            slider.classList.toggle("show");
+            body.classList.toggle("show");
+        });
+
+        var $span = $(".tab>span");
+
+        $span.on("click", function () {
+            var _this = $(this);
+            var id = _this.data("id");
+            getList(id);
+            _this.addClass("current").siblings().removeClass("current");
+        });
+
+
+        function getList(id) {
+            $.get("http://182.254.146.100:9090/api/gethometab/" + id, function (response) {
+                var html = template("tpl", {
+                    list: response
+                });
+                $(".comiclist").html(html);
+            });
+        }
     });
 </script>
